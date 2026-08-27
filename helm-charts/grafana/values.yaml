@@ -1,0 +1,10 @@
+grafana:
+  enabled: true
+  adminPassword: admin
+  persistence:
+    enabled: true
+    size: 10Gi
+  ingress:
+    enabled: true
+    hosts:
+      - grafana.homelab.local
