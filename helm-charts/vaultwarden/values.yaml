@@ -1,0 +1,84 @@
+# Default values for vaultwarden.
+
+replicaCount: 1
+
+image:
+  repository: vaultwarden/server
+  pullPolicy: IfNotPresent
+  tag: "1.32.0"
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+
+podAnnotations: {}
+
+podSecurityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: true
+  className: "traefik"
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  hosts:
+    - host: vaultwarden.homelab.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: vaultwarden-tls
+      hosts:
+        - vaultwarden.homelab.local
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  storageClass: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Application configuration
+env:
+  DOMAIN: "https://vaultwarden.homelab.local"
+  SIGNUPS_ALLOWED: "false"
+  ADMIN_TOKEN: ""
+  SMTP_HOST: ""
+  SMTP_FROM: ""
+  SMTP_PORT: "587"
+  SMTP_SECURITY: "starttls"
+  SMTP_USERNAME: ""
+  SMTP_PASSWORD: ""
+  WEBSOCKET_ENABLED: "true"
+  ROCKET_PORT: "8080"

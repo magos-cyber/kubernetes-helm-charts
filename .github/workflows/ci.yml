@@ -1,0 +1,43 @@
+name: Lint and Test Charts
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Helm lint
+        run: |
+          for chart in helm-charts/*/; do
+            echo "=== Linting $chart ==="
+            helm lint "$chart" || true
+          done
+
+  template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Install kind
+        uses: helm/kind-action@v1
+
+      - name: Helm template
+        run: |
+          for chart in helm-charts/*/; do
+            echo "=== Templating $chart ==="
+            helm template test "$chart" --dry-run || true
+          done

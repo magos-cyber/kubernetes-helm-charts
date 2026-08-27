@@ -1,0 +1,47 @@
+# Prometheus Adapter values for homelab
+
+replicaCount: 1
+
+image:
+  repository: registry.k8s.io/prometheus-adapter/prometheus-adapter
+  tag: "v0.11.2"
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+
+service:
+  type: ClusterIP
+  port: 443
+  targetPort: 6443
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+# Prometheus URL
+prometheus:
+  url: "http://prometheus.monitoring.svc.cluster.local:9090"
+
+# Rules configuration
+rules:
+  default: true
+  custom: []
+  # Example custom rule:
+  # - seriesQuery: 'container_cpu_usage_seconds_total{namespace!="",pod!=""}'
+  #   resources:
+  #     overrides:
+  #       namespace: {resource: "namespace"}
+  #       pod: {resource: "pod"}
+  #   name:
+  #     matches: "^(.*)_total"
+  #     as: "${1}_per_second"
+  #   metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>}[5m])) by (<<.GroupBy>>)'

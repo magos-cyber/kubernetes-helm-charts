@@ -1,0 +1,22 @@
+apiVersion: v2
+name: traefik
+description: Traefik ingress controller for homelab Kubernetes
+type: application
+version: 1.0.0
+appVersion: "v3.1.0"
+keywords:
+  - traefik
+  - ingress
+  - reverse-proxy
+  - load-balancer
+home: https://traefik.io
+sources:
+  - https://github.com/traefik/traefik
+maintainers:
+  - name: magos-cyber
+    url: https://github.com/magos-cyber
+dependencies:
+  - name: traefik
+    version: "30.0.0"
+    repository: https://traefik.github.io/charts
+    condition: traefik.enabled

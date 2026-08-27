@@ -1,0 +1,19 @@
+apiVersion: v2
+name: prometheus-adapter
+description: Prometheus Adapter for Kubernetes custom metrics
+type: application
+version: 1.0.0
+appVersion: "v0.11.2"
+keywords:
+  - prometheus
+  - metrics
+  - adapter
+  - monitoring
+  - custom-metrics
+home: https://github.com/kubernetes-sigs/prometheus-adapter
+sources:
+  - https://github.com/kubernetes-sigs/prometheus-adapter
+maintainers:
+  - name: magos-cyber
+    url: https://github.com/magos-cyber
+dependencies: []

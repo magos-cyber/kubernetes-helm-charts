@@ -1,0 +1,50 @@
+# Traefik values for homelab
+
+traefik:
+  enabled: true
+  deployment:
+    replicas: 2
+  ports:
+    web:
+      port: 80
+      expose: true
+    websecure:
+      port: 443
+      expose: true
+    traefik:
+      port: 9000
+      expose: false
+  providers:
+    kubernetesCRD:
+      enabled: true
+      allowExternalNameServices: true
+    kubernetesIngress:
+      enabled: true
+      allowExternalNameServices: true
+  logs:
+    general:
+      level: INFO
+    access:
+      enabled: true
+  service:
+    type: LoadBalancer
+    annotations: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+  securityContext:
+    capabilities:
+      drop: [ALL]
+    readOnlyRootFilesystem: true
+    runAsGroup: 65532
+    runAsNonRoot: true
+    runAsUser: 65532
+  podSecurityContext:
+    fsGroup: 65532
+    runAsGroup: 65532
+    runAsNonRoot: true
+    runAsUser: 65532
