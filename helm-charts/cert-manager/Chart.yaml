@@ -1,0 +1,22 @@
+apiVersion: v2
+name: cert-manager
+description: Let's Encrypt certificate manager for Kubernetes
+type: application
+version: 1.0.0
+appVersion: "v1.15.0"
+keywords:
+  - cert-manager
+  - letsencrypt
+  - tls
+  - certificates
+home: https://cert-manager.io
+sources:
+  - https://github.com/cert-manager/cert-manager
+maintainers:
+  - name: magos-cyber
+    url: https://github.com/magos-cyber
+dependencies:
+  - name: cert-manager
+    version: "1.15.0"
+    repository: https://charts.jetstack.io
+    condition: cert-manager.enabled
