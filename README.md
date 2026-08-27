@@ -42,26 +42,26 @@ helm package helm-charts/vaultwarden
 
 ```
 kubernetes-helm-charts/
-├── helm-charts/
-│   ├── vaultwarden/
-│   │   ├── Chart.yaml
-│   │   ├── values.yaml
-│   │   └── templates/
-│   │       ├── _helpers.tpl
-│   │       ├── deployment.yaml
-│   │       ├── ingress.yaml
-│   │       ├── pvc.yaml
-│   │       ├── service.yaml
-│   │       └── serviceaccount.yaml
-│   ├── traefik/
-│   │   ├── Chart.yaml
-│   │   ├── values.yaml
-│   │   └── templates/
-│   └── prometheus-adapter/
-│       ├── Chart.yaml
-│       ├── values.yaml
-│       └── templates/
-└── README.md
++-- helm-charts/
+|   +-- vaultwarden/
+|   |   +-- Chart.yaml
+|   |   +-- values.yaml
+|   |   `-- templates/
+|   |       +-- _helpers.tpl
+|   |       +-- deployment.yaml
+|   |       +-- ingress.yaml
+|   |       +-- pvc.yaml
+|   |       +-- service.yaml
+|   |       `-- serviceaccount.yaml
+|   +-- traefik/
+|   |   +-- Chart.yaml
+|   |   +-- values.yaml
+|   |   `-- templates/
+|   `-- prometheus-adapter/
+|       +-- Chart.yaml
+|       +-- values.yaml
+|       `-- templates/
+`-- README.md
 ```
 
 ## License
