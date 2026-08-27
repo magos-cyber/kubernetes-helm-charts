@@ -1,0 +1,21 @@
+apiVersion: v2
+name: redis
+description: Redis in-memory data store for homelab
+type: application
+version: 1.0.0
+appVersion: "7.2"
+keywords:
+  - redis
+  - cache
+  - database
+home: https://redis.io
+sources:
+  - https://github.com/redis/redis
+maintainers:
+  - name: magos-cyber
+    url: https://github.com/magos-cyber
+dependencies:
+  - name: redis
+    version: "20.0.0"
+    repository: https://charts.bitnami.com/bitnami
+    condition: redis.enabled
