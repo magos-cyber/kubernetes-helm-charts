@@ -1,0 +1,11 @@
+kube-prometheus-stack:
+  enabled: true
+  prometheus:
+    prometheusSpec:
+      retention: 30d
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 50Gi
