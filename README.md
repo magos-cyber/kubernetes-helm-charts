@@ -1,68 +1,33 @@
-# Kubernetes Helm Charts for Homelab
+# Kubernetes Helm Charts
 
-Custom Helm charts for deploying homelab infrastructure on Kubernetes.
+Reusable Helm charts for homelab deployments.
 
 ## Charts
 
-| Chart | Description | Status |
-|-------|-------------|--------|
-| vaultwarden | Bitwarden-compatible password manager | Ready |
-| traefik | Ingress controller with custom config | Ready |
-| prometheus-adapter | Custom metrics adapter for HPA | Ready |
+### common-app
+Generic application deployment with:
+- Deployment
+- Service
+- Ingress (optional)
+- Resource limits
+- Environment variables
+
+### monitoring-stack
+Complete monitoring with:
+- Prometheus
+- Grafana
+- (Loki optional)
 
 ## Usage
 
-Add the repository:
-
 ```bash
-helm repo add magos-cyber https://raw.githubusercontent.com/magos-cyber/kubernetes-helm-charts/main/helm-charts
-helm repo update
+helm install myapp ./charts/common-app   --set image.repository=myapp   --set ingress.enabled=true   --set ingress.host=myapp.local
 ```
 
-Install a chart:
+## Requirements
 
-```bash
-helm install vaultwarden magos-cyber/vaultwarden -f values.yaml
-```
-
-## Development
-
-```bash
-# Lint
-helm lint helm-charts/vaultwarden
-
-# Template render
-helm template vaultwarden helm-charts/vaultwarden
-
-# Package
-helm package helm-charts/vaultwarden
-```
-
-## Repository Structure
-
-```
-kubernetes-helm-charts/
-+-- helm-charts/
-|   +-- vaultwarden/
-|   |   +-- Chart.yaml
-|   |   +-- values.yaml
-|   |   `-- templates/
-|   |       +-- _helpers.tpl
-|   |       +-- deployment.yaml
-|   |       +-- ingress.yaml
-|   |       +-- pvc.yaml
-|   |       +-- service.yaml
-|   |       `-- serviceaccount.yaml
-|   +-- traefik/
-|   |   +-- Chart.yaml
-|   |   +-- values.yaml
-|   |   `-- templates/
-|   `-- prometheus-adapter/
-|       +-- Chart.yaml
-|       +-- values.yaml
-|       `-- templates/
-`-- README.md
-```
+- Helm 3.x
+- Kubernetes 1.25+
 
 ## License
 
